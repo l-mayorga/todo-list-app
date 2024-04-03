@@ -7,19 +7,35 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
+  Keyboard,
 } from "react-native";
 
 const AddTaskView = ({ onPress }) => {
   const [task, setTask] = useState("");
+
+  const handleAddTask = () => {
+    if (!task) {
+      // task is empty, do nothing
+      return;
+    }
+    onPress(task);
+    Keyboard.dismiss();
+    setTask("");
+  };
   return (
-    // add your code here
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.inputWrapper}
     >
-      <TextInput style={styles.input} placeholder="Add a new task" />
+      <TextInput
+        value={task}
+        style={styles.input}
+        placeholder="Add a new task"
+        onChangeText={setTask}
+        onSubmitEditing={handleAddTask}
+      />
       <TouchableOpacity style={styles.touchableOpacity}>
-        <Text style={styles.touchableOpacityText} onPress={onPress}>
+        <Text style={styles.touchableOpacityText} onPress={handleAddTask}>
           Add
         </Text>
       </TouchableOpacity>
@@ -38,7 +54,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   inputWrapper: {
-    // move to bottom
     position: "absolute",
     width: "100%",
     bottom: 30,
