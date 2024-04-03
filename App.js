@@ -3,21 +3,12 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import Task from "./components/Task";
 import AddTaskView from "./components/AddTask";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 export default function App() {
-  // add state for tasks
   const [taskItems, setTaskItems] = useState([]);
 
-  // const handleAddTask = (Task) => {
-  //   console.log(`Add button has been pressed with task - ${Task}`);
-  //   setTaskItems([...taskItems, Task]);
-  // };
-
   const handleAddTask = async (task) => {
-    // add task to taskItems
     setTaskItems([...taskItems, task]);
-    // store tasks in AsyncStorage using a try/catch block
     try {
       await AsyncStorage.setItem("tasks", JSON.stringify([...taskItems, task]));
     } catch (error) {
@@ -27,10 +18,8 @@ export default function App() {
 
   const handleDeleteTask = async (taskName) => {
     console.log("Task is being deleted");
-    // filter out task from taskItems
     const newTasks = taskItems.filter((task) => task !== taskName);
     setTaskItems(newTasks);
-    // store tasks in AsyncStorage using a try/catch block
     try {
       await AsyncStorage.setItem("tasks", JSON.stringify(newTasks));
     } catch (error) {
@@ -39,10 +28,8 @@ export default function App() {
   };
 
   const handleToggleComplete = async (taskName) => {
-    // move taskName to the bottom of tasks
     const newTasks = taskItems.filter((task) => task !== taskName);
     setTaskItems([...newTasks, taskName]);
-    // store tasks in AsyncStorage using a try/catch block
     try {
       await AsyncStorage.setItem(
         "tasks",
@@ -55,7 +42,6 @@ export default function App() {
 
   useEffect(() => {
     const getTasks = async () => {
-      // get tasks from AsyncStorage using a try/catch block
       try {
         const tasks = await AsyncStorage.getItem("tasks");
         if (tasks) {
@@ -75,9 +61,6 @@ export default function App() {
         {/* add style sectionTitle */}
         <Text style={styles.sectionTitle}> Today's Tasks </Text>
         <View style={styles.itemWrapper}>
-          {/* {taskItems.map((task, index) => (
-            <Task name={task} key={index} onDelete={handleDeleteTask} />
-          ))} */}
           <FlatList
             data={taskItems}
             renderItem={({ item }) => (

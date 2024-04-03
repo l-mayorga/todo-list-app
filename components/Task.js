@@ -13,9 +13,6 @@ const Task = ({ name, onDelete, onComplete }) => {
     }
   };
 
-  // const handleDelete = () => {
-  // };
-
   return (
     <View style={styles.item}>
       <TouchableOpacity onPress={handleComplete}>
@@ -35,7 +32,6 @@ const Task = ({ name, onDelete, onComplete }) => {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;❌
         </Text>
       </TouchableOpacity>
-      {/* <Text style={styles.itemText}>{name}</Text> */}
     </View>
   );
 };
@@ -48,7 +44,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginTop: 16,
     marginLeft: 16,
-    // backgroundColor: "white",
   },
   item: {
     borderRadius: 10,
@@ -68,7 +63,6 @@ const styles = StyleSheet.create({
     opacity: 0.4,
     marginLeft: 16,
   },
-  // white checkmark
   checkmark: {
     color: "black",
     fontSize: 20,
@@ -84,7 +78,5 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     fontSize: 24,
-    color: "red",
-    marginRight: 16,
   },
 });

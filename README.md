@@ -1,5 +1,7 @@
 ## Additionals features:
-Can add task using return key
+
+Can add tasks using `return`
 
 ## Known bugs:
-Completting a task may move the wrong task to the bottom
+
+Completing a task may move the wrong task to the bottom
